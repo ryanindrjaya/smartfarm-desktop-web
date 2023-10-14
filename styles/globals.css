@@ -63,9 +63,9 @@ body {
   .horizontal-scroll-container {
     overflow: auto;
     white-space: nowrap;
-    display: flex;
     padding-bottom: 32px;
     margin-top: 24px;
+    display: block;
   }
 
   .horizontal-scroll-content {
