@@ -29,17 +29,15 @@ export default function SettingHumidity({ id }: Props) {
 
   return (
     <MainLayout title="Humidity Setting">
-      <div className="w-full h-full flex flex-col justify-center ">
-        <div className="w-full h-[75%] px-14 flex justify-between items-center bg-glass rounded-3xl">
+      <div className="w-full h-[70vh] lg:h-full flex flex-col justify-center ">
+        <div className="w-full h-full lg:h-[75%] px-14 flex flex-col-reverse justify-center lg:flex-row lg:justify-between items-center bg-glass rounded-3xl">
           <div>
-            <h1 className="font-medium text-5xl">Humidity Setting</h1>
-            <Button className="mt-8 bg-[#585761] rounded-xl">Set Humidity</Button>
+            <h1 className="font-medium lg:block hidden text-5xl">Humidity Setting</h1>
+            <Button className="mt-8 w-full bg-[#585761] rounded-xl">Set Humidity</Button>
           </div>
-          <div className="flex flex-col gap-10">
-            <SettingInput label="Value" setValue={setHumidity} value={humidity} />
-          </div>
+          <SettingInput label="Value" setValue={setHumidity} value={humidity} />
         </div>
-        <Button onClick={handleBack} className="w-[323px] rounded-xl mt-10">
+        <Button onClick={handleBack} className="w-full lg:w-[323px] rounded-xl mt-10">
           Back
         </Button>
       </div>

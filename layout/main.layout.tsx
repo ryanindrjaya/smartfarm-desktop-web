@@ -13,7 +13,7 @@ type Props = {
 
 const Loading = () => {
   return (
-    <div className="w-full h-full flex justify-center items-center">
+    <div className="w-full h-[90vh] lg:h-full flex justify-center items-center">
       <PiSpinnerGapLight className="animate-spin text-6xl" />
     </div>
   );
@@ -38,14 +38,14 @@ export default function MainLayout({ children, title }: Props) {
       <Head>
         <title>{title}</title>
       </Head>
-      <main className={`px-8 max-h-screen overflow-clip ${montserrat.className}`}>
-        <header className=" flex pt-5 h-[8vh] justify-between items-start">
-          <h1 onClick={handleClick} className="text-white cursor-pointer text-4xl font-extrabold">
+      <main className={`px-5 lg:px-8 lg:max-h-screen min-h-screen max-h-none overflow-clip ${montserrat.className}`}>
+        <header className=" flex pt-5 lg:h-[8vh] justify-between items-start">
+          <h1 onClick={handleClick} className="text-white cursor-pointer text-md lg:text-4xl font-extrabold">
             OS SMART<span className={`text-[#00FF0A]`}>FARM</span>
           </h1>
-          <h1 className="text-white text-3xl font-semibold">{loading ? "Loading..." : title}</h1>
+          <h1 className="text-white text-sm lg:text-3xl font-semibold">{loading ? "Loading..." : title}</h1>
         </header>
-        <main className="h-[90vh]  pt-3 text-white relative">{loading ? <Loading /> : children}</main>
+        <main className="lg:h-[90vh] h-full  pt-3 text-white relative">{loading ? <Loading /> : children}</main>
       </main>
     </>
   );

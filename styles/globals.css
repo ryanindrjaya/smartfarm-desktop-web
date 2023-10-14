@@ -6,6 +6,7 @@ body {
   background-image: url("/main_bg.png");
   background-repeat: no-repeat;
   background-size: cover;
+  height: auto;
 }
 
 .bg-glass {
@@ -56,4 +57,20 @@ body {
 .horizontal-scroll-content {
   display: flex;
   gap: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .horizontal-scroll-container {
+    overflow: auto;
+    white-space: nowrap;
+    display: flex;
+    padding-bottom: 32px;
+    margin-top: 24px;
+  }
+
+  .horizontal-scroll-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 }

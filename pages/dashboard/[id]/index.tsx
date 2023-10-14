@@ -5,7 +5,7 @@ import Statistic from "@/components/Statistic";
 import MainLayout from "@/layout/main.layout";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const mockOptions = [
   {
@@ -53,6 +53,24 @@ export async function getServerSideProps(ctx: any) {
 }
 
 export default function DetailController({ id, value }: Props) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (window === undefined) return;
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const router = useRouter();
   const handleChange = (value: any) => {
     router.push(`/dashboard/${value.value}`);
@@ -60,115 +78,227 @@ export default function DetailController({ id, value }: Props) {
 
   return (
     <MainLayout title="Dashboard">
-      <div className="mb-6 flex justify-between items-center">
-        <Select onChange={handleChange} className="w-[304px]" options={mockOptions} defaultValue={value} />
+      <div className="mb-4 flex justify-between items-center">
+        <Select onChange={handleChange} className="w-[180px] lg:w-[304px]" options={mockOptions} defaultValue={value} />
         <PowerButton />
       </div>
 
-      <div className="flex h-auto lg:h-[78vh] gap-4">
-        <div className="w-full h-full flex flex-col gap-4 lg:w-[25%]">
-          {/* TEMPERATURE */}
-          <div className="h-auto lg:h-[50%] bg-glass rounded-lg p-4">
-            <div className="flex mb-3 justify-between items-center">
-              <h2 className="text-xl font-medium">Temperature</h2>
-              <SettingButton settingPage="setting-temperature" />
-            </div>
+      {!isMobile ? (
+        <div className="hidden lg:flex h-auto lg:h-[78vh] gap-4">
+          <div className="w-full h-full flex flex-col gap-4 lg:w-[25%]">
+            {/* TEMPERATURE */}
+            <div className="h-auto lg:h-[50%] bg-glass rounded-lg p-4">
+              <div className="flex mb-3 justify-between items-center">
+                <h2 className="text-xl font-medium">Temperature</h2>
+                <SettingButton settingPage="setting-temperature" />
+              </div>
 
-            <div className="flex flex-col gap-3">
-              <Statistic label="Air (30.0 - 100.0)" value="28.5 &deg;C" />
-              <Statistic label="Water" value="24 &deg;C" />
+              <div className="flex flex-col gap-3">
+                <Statistic label="Air (30.0 - 100.0)" value="28.5 &deg;C" />
+                <Statistic label="Water" value="24 &deg;C" />
+              </div>
+            </div>
+            {/* END TEMPERATURE */}
+
+            {/* HUMIDITY */}
+            <div className="h-auto lg:h-[30%] bg-glass rounded-lg p-4">
+              <div className="flex mb-3 justify-between items-center">
+                <h2 className="text-xl font-medium">Humidity</h2>
+                <SettingButton settingPage="setting-humidity" />
+              </div>
+
+              <p className="text-5xl font-bold">24 &deg;C</p>
+            </div>
+            {/* END HUMIDITY */}
+
+            {/* FAN & HEATER */}
+            <div className="h-auto lg:h-[20%] bg-glass rounded-lg p-4">
+              <div className="flex flex-col lg:flex-row gap-x-36 gap-y-6">
+                <Statistic label="Fan" value="On" size="xl" />
+                <Statistic label="Heater" value="Off" size="xl" />
+              </div>
+            </div>
+            {/* FAN & HEATER */}
+          </div>
+
+          <div className="w-full h-full flex flex-col gap-4 lg:w-[75%]">
+            {/* DAP */}
+            <div className="h-auto flex flex-col items-center lg:flex-row gap-x-36 gap-y-6 lg:h-[35%] bg-glass rounded-lg p-4">
+              <div className="flex flex-col gap-1 px-5">
+                <h2 className="text-xl font-medium">Date Time</h2>
+                <h2 className="text-5xl font-bold">26 July 2023</h2>
+                <h2 className="text-ld ">12.48.30</h2>
+              </div>
+              <div className="flex flex-col gap-1 px-5">
+                <h2 className="text-xl font-medium">DAP</h2>
+                <h2 className="text-5xl font-bold">50 Days</h2>
+                <h2 className="text-ld ">12.48.30</h2>
+              </div>
+            </div>
+            {/* DAP */}
+
+            <div className="h-auto lg:h-[65%] flex flex-col gap-4 lg:flex-row">
+              {/* EC */}
+              <div className="h-auto lg:h-full bg-glass flex-1 rounded-lg px-8 py-4">
+                <div className="flex mb-3 justify-between items-center">
+                  <h2 className="text-xl font-medium">EC (2.56)</h2>
+                  <SettingButton settingPage="setting-ec" />
+                </div>
+
+                <p className="text-5xl font-bold mb-10">0.01</p>
+
+                <div className="flex flex-col gap-8">
+                  <Statistic label="A Nutrition" value="On" size="xl" />
+                  <Statistic label="B Nutrition" value="On" size="xl" />
+                </div>
+              </div>
+              {/* EC */}
+
+              {/* PH */}
+              <div className="h-auto lg:h-full bg-glass flex-1 rounded-lg px-8 py-4">
+                <div className="flex mb-3 justify-between items-center">
+                  <h2 className="text-xl font-medium">pH (5.66 - 7.50)</h2>
+                  <SettingButton settingPage="setting-ph" />
+                </div>
+
+                <p className="text-5xl font-bold mb-10">6.20</p>
+
+                <div className="flex flex-col gap-8">
+                  <Statistic label="pH Up" value="On" size="xl" />
+                  <Statistic label="pH Down" value="Off" size="xl" />
+                </div>
+              </div>
+              {/* PH */}
+
+              {/* WATERFLOW */}
+              <div className="h-auto lg:h-full bg-glass flex-1 rounded-lg px-8 py-4">
+                <div className="flex mb-3 justify-between items-center">
+                  <h2 className="text-xl font-medium">Waterflow</h2>
+                  <SettingButton settingPage="setting-waterflow" />
+                </div>
+
+                <p className="text-5xl font-bold mb-10">0.00</p>
+
+                <div className="flex flex-col gap-8">
+                  <Statistic label="Pump 1" value="On" size="xl" />
+                  <Statistic label="Pump 2" value="Off" size="xl" />
+                </div>
+              </div>
+              {/* WATERFLOW */}
             </div>
           </div>
-          {/* END TEMPERATURE */}
-
-          {/* HUMIDITY */}
-          <div className="h-auto lg:h-[30%] bg-glass rounded-lg p-4">
-            <div className="flex mb-3 justify-between items-center">
-              <h2 className="text-xl font-medium">Humidity</h2>
-              <SettingButton settingPage="setting-humidity" />
-            </div>
-
-            <p className="text-5xl font-bold">24 &deg;C</p>
-          </div>
-          {/* END HUMIDITY */}
-
-          {/* FAN & HEATER */}
-          <div className="h-auto lg:h-[20%] bg-glass rounded-lg p-4">
-            <div className="flex flex-col lg:flex-row gap-x-36 gap-y-6">
-              <Statistic label="Fan" value="On" size="xl" />
-              <Statistic label="Heater" value="Off" size="xl" />
-            </div>
-          </div>
-          {/* FAN & HEATER */}
         </div>
-
-        <div className="w-full h-full flex flex-col gap-4 lg:w-[75%]">
+      ) : (
+        <div className="lg:hidden flex flex-col h-auto lg:h-[78vh] gap-4">
           {/* DAP */}
-          <div className="h-auto flex flex-col items-center lg:flex-row gap-x-36 gap-y-6 lg:h-[35%] bg-glass rounded-lg p-4">
-            <div className="flex flex-col gap-1 px-5">
-              <h2 className="text-xl font-medium">Date Time</h2>
-              <h2 className="text-5xl font-bold">26 July 2023</h2>
-              <h2 className="text-ld ">12.48.30</h2>
+          <div className="h-auto flex justify-between items-center bg-glass rounded-lg p-3">
+            <div className="flex flex-col gap-1">
+              <h2 className="text-xs uppercase font-medium">Date Time</h2>
+              <h2 className="text-sm font-bold">26 Jun 2023</h2>
             </div>
-            <div className="flex flex-col gap-1 px-5">
-              <h2 className="text-xl font-medium">DAP</h2>
-              <h2 className="text-5xl font-bold">50 Days</h2>
-              <h2 className="text-ld ">12.48.30</h2>
+            <div className="flex flex-col gap-1">
+              <h2 className="text-xs font-medium">DAP</h2>
+              <h2 className="text-sm font-bold">50 Days</h2>
+            </div>
+            <div className="flex flex-col gap-1">
+              <h2 className="text-xs font-medium">TIME</h2>
+              <h2 className="text-sm ">12.48.30</h2>
             </div>
           </div>
           {/* DAP */}
-
-          <div className="h-auto lg:h-[65%] flex flex-col gap-4 lg:flex-row">
-            {/* EC */}
-            <div className="h-auto lg:h-full bg-glass flex-1 rounded-lg px-8 py-4">
+          <div className="w-full h-full flex gap-4">
+            {/* TEMPERATURE */}
+            <div className="h-auto w-[60%] bg-glass rounded-lg p-3">
               <div className="flex mb-3 justify-between items-center">
-                <h2 className="text-xl font-medium">EC (2.56)</h2>
-                <SettingButton settingPage="setting-ec" />
+                <h2 className="text-xs font-medium">Temperature</h2>
+                <SettingButton isMobile settingPage="setting-temperature" />
               </div>
 
-              <p className="text-5xl font-bold mb-10">0.01</p>
-
-              <div className="flex flex-col gap-8">
-                <Statistic label="A Nutrition" value="On" size="xl" />
-                <Statistic label="B Nutrition" value="On" size="xl" />
+              <div className="flex justify-between ">
+                <Statistic isMobile label="Air" value="28.5 &deg;C" />
+                <Statistic isMobile label="Water" value="24 &deg;C" />
               </div>
             </div>
-            {/* EC */}
+            {/* END TEMPERATURE */}
 
-            {/* PH */}
-            <div className="h-auto lg:h-full bg-glass flex-1 rounded-lg px-8 py-4">
+            {/* HUMIDITY */}
+            <div className="h-auto w-[40%] bg-glass rounded-lg p-3">
               <div className="flex mb-3 justify-between items-center">
-                <h2 className="text-xl font-medium">pH (5.66 - 7.50)</h2>
-                <SettingButton settingPage="setting-ph" />
+                <h2 className="text-xs font-medium">Humidity</h2>
+                <SettingButton isMobile settingPage="setting-humidity" />
               </div>
 
-              <p className="text-5xl font-bold mb-10">6.20</p>
-
-              <div className="flex flex-col gap-8">
-                <Statistic label="pH Up" value="On" size="xl" />
-                <Statistic label="pH Down" value="Off" size="xl" />
+              <Statistic isMobile label="Value" value="50 &deg;C" />
+            </div>
+            {/* END HUMIDITY */}
+          </div>
+          {/* FAN & HEATER */}
+          <div className="h-auto lg:h-[20%] bg-glass rounded-lg p-2">
+            <div className="flex justify-center gap-10">
+              <div className="flex gap-3">
+                <img src="/heater.svg" />
+                <p className={`text-base font-medium`}>On</p>
+              </div>
+              <div className="flex gap-3">
+                <img src="/fan.svg" />
+                <p className={`text-base font-medium`}>Off</p>
               </div>
             </div>
-            {/* PH */}
+          </div>
+          {/* FAN & HEATER */}
 
-            {/* WATERFLOW */}
-            <div className="h-auto lg:h-full bg-glass flex-1 rounded-lg px-8 py-4">
-              <div className="flex mb-3 justify-between items-center">
-                <h2 className="text-xl font-medium">Waterflow</h2>
-                <SettingButton settingPage="setting-waterflow" />
+          <div className="w-full h-full flex flex-col gap-4 lg:w-[75%]">
+            <div className="h-auto flex flex-col gap-4 lg:flex-row">
+              {/* EC */}
+              <div className="h-auto relative bg-glass flex gap-8 rounded-lg px-8 py-8">
+                <div className="flex flex-col gap-5">
+                  <h2 className="text-xs font-medium">EC (2.56)</h2>
+                  <p className="text-5xl font-bold mb-10">0.01</p>
+                </div>
+
+                <SettingButton className="absolute right-3 top-3" settingPage="setting-ec" />
+
+                <div className="flex flex-col gap-3">
+                  <Statistic isMobile label="A Nutrition" value="On" size="xl" />
+                  <Statistic isMobile label="B Nutrition" value="On" size="xl" />
+                </div>
               </div>
+              {/* EC */}
 
-              <p className="text-5xl font-bold mb-10">0.00</p>
+              {/* PH */}
+              <div className="h-auto relative bg-glass flex gap-8 rounded-lg px-8 py-8">
+                <div className="flex flex-col gap-5">
+                  <h2 className="text-xs font-medium">pH (5.66 - 7.50)</h2>
+                  <p className="text-5xl font-bold mb-10">6.20</p>
+                </div>
 
-              <div className="flex flex-col gap-8">
-                <Statistic label="Pump 1" value="On" size="xl" />
-                <Statistic label="Pump 2" value="Off" size="xl" />
+                <SettingButton className="absolute right-3 top-3" settingPage="setting-ph" />
+
+                <div className="flex flex-col gap-3">
+                  <Statistic isMobile label="pH Up" value="On" size="xl" />
+                  <Statistic isMobile label="pH Down" value="Off" size="xl" />
+                </div>
               </div>
+              {/* PH */}
+
+              {/* WATERFLOW */}
+              <div className="h-auto relative bg-glass flex gap-8 rounded-lg px-8 py-8 mb-5">
+                <div className="flex flex-col gap-5">
+                  <h2 className="text-xl font-medium">Waterflow</h2>
+                  <p className="text-5xl font-bold mb-10">0.00</p>
+                </div>
+                <SettingButton className="absolute right-3 top-3" settingPage="setting-waterflow" />
+
+                <div className="flex flex-col gap-3">
+                  <Statistic isMobile label="Pump 1" value="On" size="xl" />
+                  <Statistic isMobile label="Pump 2" value="Off" size="xl" />
+                </div>
+              </div>
+              {/* WATERFLOW */}
             </div>
-            {/* WATERFLOW */}
           </div>
         </div>
-      </div>
+      )}
     </MainLayout>
   );
 }

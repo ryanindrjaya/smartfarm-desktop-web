@@ -30,7 +30,7 @@ export default function Select({ className, options, defaultValue, onChange }: P
   return (
     <div
       onClick={() => setOpen(!open)}
-      className={`px-6 py-1 relative z-50 flex justify-between cursor-pointer bg-glass font-medium text-lg rounded-md ${className}`}
+      className={`px-4 lg:px-6 py-1 relative z-50 flex justify-between cursor-pointer bg-glass font-medium text-sm lg:text-lg rounded-md ${className}`}
     >
       <span>{selected?.label}</span>
 

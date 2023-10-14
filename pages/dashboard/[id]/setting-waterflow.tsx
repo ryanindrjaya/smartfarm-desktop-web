@@ -32,18 +32,18 @@ export default function SettingWaterflow({ id }: Props) {
 
   return (
     <MainLayout title="Peristaltic Pump Setting">
-      <div className="w-full h-full flex flex-col justify-center ">
-        <div className="w-full h-[75%] px-14 flex justify-between items-center bg-glass rounded-3xl">
+      <div className="w-full h-[70vh] lg:h-full flex flex-col justify-center ">
+        <div className="w-full h-full lg:h-[75%] px-14 flex flex-col-reverse justify-center lg:flex-row lg:justify-between items-center bg-glass rounded-3xl">
           <div>
-            <h1 className="font-medium text-5xl">Peristaltic Pump</h1>
-            <Button className="mt-8 bg-[#585761] rounded-xl">Set Peristaltic Pump</Button>
+            <h1 className="font-medium lg:block hidden text-5xl">Peristaltic Pump</h1>
+            <Button className="mt-8 w-full bg-[#585761] rounded-xl">Set Peristaltic Pump</Button>
           </div>
           <div className="flex flex-col gap-10">
             <SettingInput label="Dose Time" setValue={setDoseTime} value={doseTime} />
-            <SettingInput label="Dose Interval" setValue={setDoseInterval} value={doseInterval} />
+            <SettingInput label="High" setValue={setDoseInterval} value={doseInterval} />
           </div>
         </div>
-        <Button onClick={handleBack} className="w-[323px] rounded-xl mt-10">
+        <Button onClick={handleBack} className="w-full lg:w-[323px] rounded-xl mt-10">
           Back
         </Button>
       </div>

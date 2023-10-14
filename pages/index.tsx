@@ -133,7 +133,9 @@ export default function Home() {
         <ControllerList data={mockData} />
       </div>
 
-      <Button className="absolute bottom-1 left-1/2 transform -translate-x-1/2 rounded-full">Add New Controller</Button>
+      <Button className="lg:block hidden absolute bottom-1 left-1/2 transform -translate-x-1/2 rounded-full">
+        Add New Controller
+      </Button>
     </MainLayout>
   );
 }
