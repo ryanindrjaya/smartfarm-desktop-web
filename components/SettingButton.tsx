@@ -16,11 +16,8 @@ export default function SettingButton({ settingPage, isMobile = false, className
   };
 
   return (
-    <div
-      onClick={handleClick}
-      className={`rounded-full cursor-pointer hover:bg-white/10 transition-all ${className} ${isMobile ? "" : "p-2"} `}
-    >
-      <AiOutlineSetting className={` ${isMobile ? "text-xl" : "text-2xl"} text-white`} />
+    <div onClick={handleClick} className={`rounded-full cursor-pointer hover:bg-white/10 transition-all ${className}`}>
+      <AiOutlineSetting className={`text-xl lg:text-3xl text-white`} />
     </div>
   );
 }

@@ -59,7 +59,7 @@ export default function DetailController({ id, value }: Props) {
     if (window === undefined) return;
 
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
+      setIsMobile(window.innerWidth <= 426);
     };
 
     handleResize();
@@ -84,12 +84,12 @@ export default function DetailController({ id, value }: Props) {
       </div>
 
       {!isMobile ? (
-        <div className="hidden lg:flex h-auto lg:h-[78vh] gap-4">
-          <div className="w-full h-full flex flex-col gap-4 lg:w-[25%]">
+        <div className="flex h-[78vh] gap-4">
+          <div className="h-full flex flex-col gap-4 w-[25%]">
             {/* TEMPERATURE */}
-            <div className="h-auto lg:h-[50%] bg-glass rounded-lg p-4">
+            <div className=" h-[50%] bg-glass rounded-lg p-4">
               <div className="flex mb-3 justify-between items-center">
-                <h2 className="text-xl font-medium">Temperature</h2>
+                <h2 className="md:text-base lg:text-xl font-medium">Temperature</h2>
                 <SettingButton settingPage="setting-temperature" />
               </div>
 
@@ -101,87 +101,87 @@ export default function DetailController({ id, value }: Props) {
             {/* END TEMPERATURE */}
 
             {/* HUMIDITY */}
-            <div className="h-auto lg:h-[30%] bg-glass rounded-lg p-4">
+            <div className=" h-[30%] bg-glass rounded-lg p-4">
               <div className="flex mb-3 justify-between items-center">
-                <h2 className="text-xl font-medium">Humidity</h2>
+                <h2 className="md:text-base lg:text-xl font-medium">Humidity</h2>
                 <SettingButton settingPage="setting-humidity" />
               </div>
 
-              <p className="text-5xl font-bold">24 &deg;C</p>
+              <p className="md:text-2xl lg:text-5xl font-bold">24 &deg;C</p>
             </div>
             {/* END HUMIDITY */}
 
             {/* FAN & HEATER */}
-            <div className="h-auto lg:h-[20%] bg-glass rounded-lg p-4">
-              <div className="flex flex-col lg:flex-row gap-x-36 gap-y-6">
-                <Statistic label="Fan" value="On" size="xl" />
-                <Statistic label="Heater" value="Off" size="xl" />
+            <div className=" h-[20%] bg-glass rounded-lg p-4">
+              <div className="flex md:gap-14 lg:gap-36">
+                <Statistic small label="Fan" value="On" />
+                <Statistic small label="Heater" value="Off" />
               </div>
             </div>
             {/* FAN & HEATER */}
           </div>
 
-          <div className="w-full h-full flex flex-col gap-4 lg:w-[75%]">
+          <div className=" h-full flex flex-col gap-4 w-[75%]">
             {/* DAP */}
-            <div className="h-auto flex flex-col items-center lg:flex-row gap-x-36 gap-y-6 lg:h-[35%] bg-glass rounded-lg p-4">
+            <div className=" flex  items-center flex-row gap-x-12 gap-y-6 h-[35%] bg-glass rounded-lg p-4">
               <div className="flex flex-col gap-1 px-5">
-                <h2 className="text-xl font-medium">Date Time</h2>
-                <h2 className="text-5xl font-bold">26 July 2023</h2>
-                <h2 className="text-ld ">12.48.30</h2>
+                <h2 className="md:text-base lg:text-xl font-medium">Date Time</h2>
+                <h2 className="md:text-2xl lg:text-5xl font-bold">26 July 2023</h2>
+                <h2 className="text-base ">12.48.30</h2>
               </div>
               <div className="flex flex-col gap-1 px-5">
-                <h2 className="text-xl font-medium">DAP</h2>
-                <h2 className="text-5xl font-bold">50 Days</h2>
-                <h2 className="text-ld ">12.48.30</h2>
+                <h2 className="md:text-base lg:text-xl font-medium">DAP</h2>
+                <h2 className="md:text-2xl lg:text-5xl font-bold">50 Days</h2>
+                <h2 className="text-base ">12.48.30</h2>
               </div>
             </div>
             {/* DAP */}
 
-            <div className="h-auto lg:h-[65%] flex flex-col gap-4 lg:flex-row">
+            <div className=" h-[65%] flex gap-4 flex-row">
               {/* EC */}
-              <div className="h-auto lg:h-full bg-glass flex-1 rounded-lg px-8 py-4">
+              <div className=" h-full bg-glass flex-1 rounded-lg px-4 py-4">
                 <div className="flex mb-3 justify-between items-center">
-                  <h2 className="text-xl font-medium">EC (2.56)</h2>
+                  <h2 className="md:text-base lg:text-xl font-medium">EC (2.56)</h2>
                   <SettingButton settingPage="setting-ec" />
                 </div>
 
-                <p className="text-5xl font-bold mb-10">0.01</p>
+                <p className="md:text-2xl lg:text-5xl font-bold mb-10">0.01</p>
 
                 <div className="flex flex-col gap-8">
-                  <Statistic label="A Nutrition" value="On" size="xl" />
-                  <Statistic label="B Nutrition" value="On" size="xl" />
+                  <Statistic small label="A Nutrition" value="On" />
+                  <Statistic small label="B Nutrition" value="On" />
                 </div>
               </div>
               {/* EC */}
 
               {/* PH */}
-              <div className="h-auto lg:h-full bg-glass flex-1 rounded-lg px-8 py-4">
+              <div className=" h-full bg-glass flex-1 rounded-lg px-4 py-4">
                 <div className="flex mb-3 justify-between items-center">
-                  <h2 className="text-xl font-medium">pH (5.66 - 7.50)</h2>
+                  <h2 className="md:text-base lg:text-xl font-medium">pH (5.66 - 7.50)</h2>
                   <SettingButton settingPage="setting-ph" />
                 </div>
 
-                <p className="text-5xl font-bold mb-10">6.20</p>
+                <p className="md:text-2xl lg:text-5xl font-bold mb-10">6.20</p>
 
                 <div className="flex flex-col gap-8">
-                  <Statistic label="pH Up" value="On" size="xl" />
-                  <Statistic label="pH Down" value="Off" size="xl" />
+                  <Statistic small label="pH Up" value="On" />
+                  <Statistic small label="pH Down" value="Off" />
                 </div>
               </div>
               {/* PH */}
 
               {/* WATERFLOW */}
-              <div className="h-auto lg:h-full bg-glass flex-1 rounded-lg px-8 py-4">
+              <div className=" h-full bg-glass flex-1 rounded-lg px-4 py-4">
                 <div className="flex mb-3 justify-between items-center">
-                  <h2 className="text-xl font-medium">Waterflow</h2>
+                  <h2 className="md:text-base lg:text-xl font-medium">Waterflow</h2>
                   <SettingButton settingPage="setting-waterflow" />
                 </div>
 
-                <p className="text-5xl font-bold mb-10">0.00</p>
+                <p className="md:text-2xl lg:text-5xl font-bold mb-10">0.00</p>
 
                 <div className="flex flex-col gap-8">
-                  <Statistic label="Pump 1" value="On" size="xl" />
-                  <Statistic label="Pump 2" value="Off" size="xl" />
+                  <Statistic small label="Pump 1" value="On" />
+                  <Statistic small label="Pump 2" value="Off" />
                 </div>
               </div>
               {/* WATERFLOW */}
@@ -259,8 +259,8 @@ export default function DetailController({ id, value }: Props) {
                 <SettingButton className="absolute right-3 top-3" settingPage="setting-ec" />
 
                 <div className="flex flex-col gap-3">
-                  <Statistic isMobile label="A Nutrition" value="On" size="xl" />
-                  <Statistic isMobile label="B Nutrition" value="On" size="xl" />
+                  <Statistic isMobile label="A Nutrition" value="On" />
+                  <Statistic isMobile label="B Nutrition" value="On" />
                 </div>
               </div>
               {/* EC */}
@@ -275,8 +275,8 @@ export default function DetailController({ id, value }: Props) {
                 <SettingButton className="absolute right-3 top-3" settingPage="setting-ph" />
 
                 <div className="flex flex-col gap-3">
-                  <Statistic isMobile label="pH Up" value="On" size="xl" />
-                  <Statistic isMobile label="pH Down" value="Off" size="xl" />
+                  <Statistic isMobile label="pH Up" value="On" />
+                  <Statistic isMobile label="pH Down" value="Off" />
                 </div>
               </div>
               {/* PH */}
@@ -290,8 +290,8 @@ export default function DetailController({ id, value }: Props) {
                 <SettingButton className="absolute right-3 top-3" settingPage="setting-waterflow" />
 
                 <div className="flex flex-col gap-3">
-                  <Statistic isMobile label="Pump 1" value="On" size="xl" />
-                  <Statistic isMobile label="Pump 2" value="Off" size="xl" />
+                  <Statistic isMobile label="Pump 1" value="On" />
+                  <Statistic isMobile label="Pump 2" value="Off" />
                 </div>
               </div>
               {/* WATERFLOW */}

@@ -40,8 +40,8 @@ export default function SettingInput({ setValue, value, label }: Props) {
 
   return (
     <div className="flex flex-col gap-6">
-      <label className=" text-sm lg:text-2xl font-medium">{label}</label>
-      <div className="flex gap-1 lg:gap-5">
+      <label className=" text-sm md:text-2xl font-medium">{label}</label>
+      <div className="flex gap-1 md:gap-5">
         <button
           disabled={value === 0}
           onMouseLeave={stop}
@@ -50,7 +50,7 @@ export default function SettingInput({ setValue, value, label }: Props) {
           onClick={() => {
             setValue((prev) => Number((prev - 0.01).toFixed(2)));
           }}
-          className="p-4 rounded-lg border-2 border-white hover:bg-white/10  text-sm lg:text-3xl"
+          className="p-4 rounded-lg border-2 border-white hover:bg-white/10  text-sm md:text-xl"
         >
           -
         </button>
@@ -59,7 +59,7 @@ export default function SettingInput({ setValue, value, label }: Props) {
           onChange={(e) => setValue(Number(parseFloat(e.target.value).toFixed(2)))}
           type="number"
           step={0.01}
-          className="border-2 bg-transparent  border-white rounded-2xl text-sm lg:text-3xl text-center focus:outline-none "
+          className="border-2 bg-transparent  border-white rounded-2xl text-sm md:text-xl text-center focus:outline-none "
           value={value}
         />
         <button
@@ -69,7 +69,7 @@ export default function SettingInput({ setValue, value, label }: Props) {
           onClick={() => {
             setValue((prev) => Number((prev + 0.01).toFixed(2)));
           }}
-          className="p-4 border-2 border-white rounded-lg hover:bg-white/10 text-sm lg:text-3xl"
+          className="p-4 border-2 border-white rounded-lg hover:bg-white/10 text-sm md:text-xl"
         >
           +
         </button>

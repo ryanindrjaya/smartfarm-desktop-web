@@ -38,14 +38,14 @@ export default function MainLayout({ children, title }: Props) {
       <Head>
         <title>{title}</title>
       </Head>
-      <main className={`px-5 lg:px-8 lg:max-h-screen min-h-screen max-h-none overflow-clip ${montserrat.className}`}>
+      <main className={`px-5 lg:px-8 min-h-screen max-h-none overflow-clip ${montserrat.className}`}>
         <header className=" flex pt-5 lg:h-[8vh] justify-between items-start">
           <h1 onClick={handleClick} className="text-white cursor-pointer text-md lg:text-4xl font-extrabold">
             OS SMART<span className={`text-[#00FF0A]`}>FARM</span>
           </h1>
           <h1 className="text-white text-sm lg:text-3xl font-semibold">{loading ? "Loading..." : title}</h1>
         </header>
-        <main className="lg:h-[90vh] h-full  pt-3 text-white relative">{loading ? <Loading /> : children}</main>
+        <main className="md:h-[90vh] h-full  pt-3 text-white relative">{loading ? <Loading /> : children}</main>
       </main>
     </>
   );

@@ -59,7 +59,7 @@ body {
   gap: 20px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 756px) {
   .horizontal-scroll-container {
     overflow: auto;
     white-space: nowrap;
